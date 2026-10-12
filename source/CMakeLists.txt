@@ -3,6 +3,8 @@
 set(HEADER_FILES
 	"include/Box.hpp"
 	"include/QuadTree.hpp"
+	"include/KinectBody.hpp"
+	"include/WorldConfig.hpp"
 )
 
 set(SOURCES_FILES
