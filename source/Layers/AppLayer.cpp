@@ -16,5 +16,5 @@ void AppLayer::OnRender()
 {
 
 	DrawRectangleRec(myRec, RED);
-
+	DrawFPS(0,0);
 }
