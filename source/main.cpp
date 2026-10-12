@@ -4,27 +4,24 @@
 #include <iostream>
 #include <raylib.h>
 
+#include "Objects/include/Application.hpp"
+#include "Layers/include/AppLayer.hpp"
+
 int main()
 {
 	std::cout << "Hello CMake." << std::endl;
 
-	InitWindow(720, 720, "Ball_Arena");
+    ApplicationSpecification appSpec;
+    appSpec.Name = "Ball_Arena";
+    appSpec.Width = 720;
+    appSpec.Height = 720;
+    appSpec.VSync = false;
 
 
-    SetTargetFPS(60);             
+    Application app(appSpec);
+    app.PushLayer<AppLayer>();
+    app.Run();
 
-    while (!WindowShouldClose())   
-    {
-        BeginDrawing();
-
-        ClearBackground(RAYWHITE);
-
-        DrawText("Testing! 1 2 3", 190, 200, 20, LIGHTGRAY);
-
-        EndDrawing();
-    }
-
-    CloseWindow();       
 
 	return 0;
 }

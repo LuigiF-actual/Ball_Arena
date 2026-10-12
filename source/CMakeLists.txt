@@ -1,38 +1,22 @@
 
 
-set(HEADER_FILES
-	"include/Box.hpp"
-	"include/QuadTree.hpp"
-	"include/KinectBody.hpp"
-	"include/WorldConfig.hpp"
-)
-
-set(SOURCES_FILES
-	"main.cpp"
-)
 
 
-add_executable (Ball_Arena)
+add_executable (Ball_Arena "main.cpp")
+set_target_properties(Ball_Arena PROPERTIES LINKER_LANGUAGE CXX)
 
 set_property(TARGET Ball_Arena PROPERTY CXX_STANDARD 23)
 
-
-target_sources(Ball_Arena
-
-	PUBLIC 
-	 ${HEADER_FILES}
-	PRIVATE 
-	 ${SOURCES_FILES}
-
-)
+add_subdirectory(Layers)
+add_subdirectory(Objects)
 
 target_link_libraries(Ball_Arena
-	PRIVATE
-		raylib
-
+    PRIVATE
+        Objects
+        Layers
+        raylib
 )
 
-
-if(MINGW)
+if(MINGW) # makes mingw able to use the <print> header
     target_link_libraries(Ball_Arena PRIVATE stdc++exp)
 endif()

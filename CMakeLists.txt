@@ -9,10 +9,8 @@ if (POLICY CMP0141)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-project ("Ball_Arena")
-
+project ("Ball_Arena" CXX)
 set(CMAKE_CXX_STANDARD 23)
-
 
 # TODO: Add tests and install targets if needed.
 include(Dependencies.cmake)
