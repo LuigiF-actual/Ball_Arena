@@ -19,9 +19,9 @@
 
 
 constexpr size_t MAX_DEPTH = 8;
-constexpr float fArea = 50'000.0f;
-constexpr float world_friction = 0.97f;
-float fSearchSize = 10.0f;
+//constexpr float fArea = 50'000.0f;
+//constexpr float world_friction = 0.97f;
+//float fSearchSize = 10.0f;
 
 
 template<typename T>

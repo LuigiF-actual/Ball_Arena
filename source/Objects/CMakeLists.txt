@@ -6,6 +6,7 @@ set(HEADER_FILES
 	"include/KinectBody.hpp"
 	"include/WorldConfig.hpp"
 	"include/Application.hpp"
+	"include/CameraHandler.hpp"
 )
 
 set(SOURCES_FILES

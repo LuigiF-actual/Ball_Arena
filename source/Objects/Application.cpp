@@ -71,6 +71,16 @@ void Application::UpdateDrawFrame()
 		layer->OnUpdate();
 	}
 
+	if (IsKeyPressed(KEY_U))
+	{
+		UnloadRenderTexture(m_RenderTarget);
+		m_RenderTarget = LoadRenderTexture(1920,1080);
+	}
+	if (IsKeyPressed(KEY_P))
+	{
+		ToggleFullscreen();
+	}
+
 	BeginTextureMode(m_RenderTarget);
 
 	ClearBackground(RAYWHITE);
@@ -84,14 +94,13 @@ void Application::UpdateDrawFrame()
 
 	BeginDrawing();
 
-	ClearBackground(RAYWHITE);
+	ClearBackground(BLACK);
 
 	float scaleX = static_cast<float>(GetScreenWidth()) / m_RenderTarget.texture.width;
 	float scaleY = static_cast<float>(GetScreenHeight()) / m_RenderTarget.texture.height;
 	float scale = std::min(scaleX, scaleY);
 	float width = m_RenderTarget.texture.width * scale;
 	float height = m_RenderTarget.texture.height * scale;
-
 
 	DrawTexturePro
 	(

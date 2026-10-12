@@ -3,9 +3,7 @@
 
 namespace config
 {
-
-	constexpr float fArea = 50'000.0f;
-	constexpr float world_friction = 0.97f;
-	constexpr float fSearchSize = 10.0f;
-
+	constexpr float worldArea = 50'000.0f;
+	constexpr float friction = 0.97f;
+	constexpr float mouseSearchSize = 10.0f;
 }

@@ -9,12 +9,19 @@ AppLayer::AppLayer()
 void AppLayer::OnUpdate()
 {
 
+	m_Cam.dragAndZoom();
+
+
 }
 
 
 void AppLayer::OnRender()
 {
-
-	DrawRectangleRec(myRec, RED);
 	DrawFPS(0,0);
+
+	BeginMode2D(m_Cam.getCam());
+
+	DrawCircle(100, 100, 30, RED);
+
+	EndMode2D();
 }

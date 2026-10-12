@@ -11,6 +11,8 @@
 
 #include "Layer.hpp"
 
+#include <CameraHandler.hpp>
+
 class AppLayer : public Layer
 {
 public:
@@ -22,6 +24,6 @@ public:
 
 private:
 
-	Rectangle myRec{ 100.0f, 100.0f, 200.0f, 200.0f};
+	CameraHandler m_Cam;
 
 };
