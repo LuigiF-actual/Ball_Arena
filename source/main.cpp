@@ -13,7 +13,7 @@ int main()
 
     ApplicationSpecification appSpec;
     appSpec.Name = "Ball_Arena";
-    appSpec.Width = 720;
+    appSpec.Width = 1280;
     appSpec.Height = 720;
     appSpec.VSync = false;
 

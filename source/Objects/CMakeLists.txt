@@ -3,10 +3,12 @@
 set(HEADER_FILES
 	"include/Box.hpp"
 	"include/QuadTree.hpp"
-	"include/KinectBody.hpp"
+	"include/KineticBody.hpp"
 	"include/WorldConfig.hpp"
 	"include/Application.hpp"
 	"include/CameraHandler.hpp"
+	"include/KineticCircle.hpp"
+	"include/Event.hpp"
 )
 
 set(SOURCES_FILES

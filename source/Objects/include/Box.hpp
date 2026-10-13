@@ -17,6 +17,11 @@ public:
 		Body(rec)
 	{}
 
+	Box(float x_,float y_, float width_, float height_)
+		:
+		Body({x_,y_,width_,height_})
+	{}
+
 	float getRight() const
 	{
 		return Body.x + Body.width;

@@ -1,3 +1,4 @@
+#include "Application.hpp"
 #include <assert.h>
 #include <iostream>
 #include <ranges>
@@ -25,6 +26,7 @@ Application::Application(const ApplicationSpecification& specification)
 		SetConfigFlags(FLAG_VSYNC_HINT);
 	}
 
+	m_Specification.EventCallback = [this](Event& event) { RaiseEvent(event); };
 
 	InitWindow(m_Specification.Width, m_Specification.Height, m_Specification.Title.c_str());
 
@@ -57,6 +59,12 @@ void Application::Stop()
 	m_Running = false;
 }
 
+
+void Application::RaiseEvent(Event& event)
+{
+	if (m_Specification.EventCallback)
+		m_Specification.EventCallback(event);
+}
 
 Application& Application::Get()
 {

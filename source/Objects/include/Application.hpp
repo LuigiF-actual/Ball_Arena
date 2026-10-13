@@ -11,6 +11,8 @@
 
 #include <Layer.hpp>
 
+#include "Event.hpp"
+
 struct ApplicationSpecification
 {
 	std::string Name = "Application";
@@ -19,6 +21,9 @@ struct ApplicationSpecification
 	uint32_t Height = 720;
 	bool IsResizeable = true;
 	bool VSync = true;
+
+	using EventCallbackFn = std::function<void(Event&)>;
+	EventCallbackFn EventCallback;
 };
 
 class Application
@@ -49,6 +54,8 @@ public:
 		}
 		return nullptr;
 	}
+
+	void RaiseEvent(Event& event);
 
 
 	static Application& Get();

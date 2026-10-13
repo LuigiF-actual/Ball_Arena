@@ -242,12 +242,9 @@ struct QuadTreeItem
 	T item;
 
 
-
 	// A "locator" to the container/iterator that points to this item's iterator in the
 	// top level list - phew
 	QuadTreeItemLocation<typename std::list<QuadTreeItem<T>>::iterator > pItem;
-
-	KinectBody forces{ item, (item.Body.width * item.Body.height) };
 };
 
 // (float(rand()) / float(RAND_MAX) * (100.0f - 10.0f) + 10.0f) 

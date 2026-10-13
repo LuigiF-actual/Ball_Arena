@@ -10,9 +10,8 @@ class KinectBody
 {
 public:
 	KinectBody() = default;
-	KinectBody(Box& box_, float mass_)
+	KinectBody(float mass_)
 		:
-		m_BodyToInfluence(box_),
 		mass(mass_)
 	{}
 
@@ -24,10 +23,5 @@ public:
 	float totalForce;
 	float speed = 0.0f;
 	bool isMoving = false;
-
-private:
-
-
-	Box& m_BodyToInfluence;
 
 };
