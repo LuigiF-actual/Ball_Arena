@@ -3,11 +3,14 @@
 
 #include <memory>
 
+#include <Event.hpp>
 
 class Layer
 {
 public:
 	virtual ~Layer() = default;
+
+	virtual void OnEvent(Event& event) {}
 
 	virtual void OnUpdate() {}
 	virtual void OnRender() {}

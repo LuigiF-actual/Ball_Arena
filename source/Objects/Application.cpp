@@ -1,12 +1,12 @@
-#include "Application.hpp"
+#include "include/Application.hpp"
+
+
 #include <assert.h>
 #include <iostream>
 #include <ranges>
 #include <print>
 
-#include "include/Application.hpp"
-
-
+#include "include/WindowEvents.hpp"
 
 static Application* s_Application = nullptr;
 
@@ -62,8 +62,14 @@ void Application::Stop()
 
 void Application::RaiseEvent(Event& event)
 {
-	if (m_Specification.EventCallback)
-		m_Specification.EventCallback(event);
+	for (auto& layer : std::views::reverse(m_LayerStack))
+	{
+		layer->OnEvent(event);
+		if (event.Handled)
+		{
+			break;
+		}
+	}
 }
 
 Application& Application::Get()
@@ -79,11 +85,17 @@ void Application::UpdateDrawFrame()
 		layer->OnUpdate();
 	}
 
+
 	if (IsKeyPressed(KEY_U))
 	{
+
 		UnloadRenderTexture(m_RenderTarget);
 		m_RenderTarget = LoadRenderTexture(1920,1080);
+		RenderTextureResize event{ 1920,1080 };
+		RaiseEvent(event);
+
 	}
+
 	if (IsKeyPressed(KEY_P))
 	{
 		ToggleFullscreen();

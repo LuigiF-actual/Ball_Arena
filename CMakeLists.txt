@@ -16,8 +16,6 @@ set(CMAKE_CXX_STANDARD 23)
 include(Dependencies.cmake)
 include(Warnings.cmake)
 
-add_subdirectory("source")
-
 #For some reason my clang-tidy was conflicting with mingw
 if(NOT MINGW)
     find_program(CLANG_TIDY_EXE NAMES clang-tidy)
@@ -29,3 +27,5 @@ if(NOT MINGW)
 else()
     unset(CMAKE_CXX_CLANG_TIDY CACHE)
 endif()
+
+add_subdirectory("source")

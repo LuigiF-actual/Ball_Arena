@@ -28,7 +28,7 @@ public:
 		return m_Radius;
 	}
 
-	Box getCollisionBox()
+	Box getCollisionBox() const
 	{
 		return 
 		{

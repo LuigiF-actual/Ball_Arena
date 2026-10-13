@@ -9,6 +9,7 @@ set(HEADER_FILES
 	"include/CameraHandler.hpp"
 	"include/KineticCircle.hpp"
 	"include/Event.hpp"
+	"include/WindowEvents.hpp"
 )
 
 set(SOURCES_FILES
