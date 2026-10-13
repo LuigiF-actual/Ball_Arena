@@ -15,6 +15,7 @@
 #include <QuadTree.hpp>
 #include <Box.hpp>
 #include <WindowEvents.hpp>
+#include <WorldConfig.hpp>
 
 class AppLayer : public Layer
 {
@@ -34,11 +35,13 @@ private:
 
 private:
 
+	Vector2 m_RenderTexSize{ 1280.0f,720.0f };
+
+	Box m_CameraArea{};
+	
 	CameraHandler m_Cam;
-	Box m_CameraArea{ 0.0f,0.0f,720.0f,720.0f };
 
 	DynamicQuadTreeContainer<KineticCircle> m_QuadTree;
 
-	KineticCircle m_Cir{ 45.0f,{200.0f,200.0f} };
 
 };

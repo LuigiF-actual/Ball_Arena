@@ -10,10 +10,11 @@ class KineticCircle
 
 public:
 	KineticCircle() = default;
-	KineticCircle(float radius_,Vector2 pos_) 
+	KineticCircle(float radius_,Vector2 pos_, Color color_) 
 		:
 		m_Radius(radius_),
-		m_Pos(pos_)
+		m_Pos(pos_),
+		m_Color(color_)
 	{}
 
 	~KineticCircle() = default;
@@ -26,6 +27,11 @@ public:
 	const float& getRadius() const
 	{
 		return m_Radius;
+	}
+
+	const Color& getColor() const
+	{
+		return m_Color;
 	}
 
 	Box getCollisionBox() const
@@ -54,6 +60,7 @@ private:
 
 	float m_Radius = 0.0f;
 	Vector2 m_Pos{0.0f};
+	Color m_Color{RED};
 	//Rectangle m_CollisionBox{0.0f};
 
 };
