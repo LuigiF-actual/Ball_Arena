@@ -3,6 +3,7 @@
 #include <raylib.h>
 
 #include "Box.hpp"
+#include "KineticBody.hpp"
 
 
 class KineticCircle
@@ -14,12 +15,18 @@ public:
 		:
 		m_Radius(radius_),
 		m_Pos(pos_),
-		m_Color(color_)
+		m_Color(color_),
+		m_Forces({radius_*10.0f})
 	{}
 
 	~KineticCircle() = default;
 
 	const Vector2& getPos() const
+	{
+		return m_Pos;
+	}
+
+	Vector2& getPosition()
 	{
 		return m_Pos;
 	}
@@ -34,6 +41,11 @@ public:
 		return m_Color;
 	}
 
+	void setColor(Color color_)
+	{
+		m_Color = color_;
+	}
+
 	Box getCollisionBox() const
 	{
 		return 
@@ -43,6 +55,11 @@ public:
 			m_Radius * 2.0f,
 			m_Radius * 2.0f
 		};
+	}
+
+	KineticBody& getForces()
+	{
+		return m_Forces;
 	}
 
 	bool contain(const KineticCircle& other_) const
@@ -61,6 +78,9 @@ private:
 	float m_Radius = 0.0f;
 	Vector2 m_Pos{0.0f};
 	Color m_Color{RED};
+	
+	KineticBody m_Forces;
+
 	//Rectangle m_CollisionBox{0.0f};
 
 };
