@@ -35,11 +35,11 @@ private:
 class RenderTextureResize : public Event
 {
 public:
-	RenderTextureResize(uint32_t width, uint32_t height)
+	RenderTextureResize(int width, int height)
 		: m_Width(width), m_Height(height) {}
 
-	uint32_t GetWidth() const { return m_Width; }
-	uint32_t GetHeight() const { return m_Height; }
+	int GetWidth() const { return m_Width; }
+	int GetHeight() const { return m_Height; }
 
 	std::string ToString() const override
 	{
@@ -48,5 +48,5 @@ public:
 
 	EVENT_CLASS_TYPE(WindowResize)
 private:
-	uint32_t m_Width, m_Height;
+	int m_Width, m_Height;
 };

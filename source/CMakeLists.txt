@@ -17,6 +17,8 @@ target_link_libraries(Ball_Arena
         raylib
 )
 
+target_include_directories(Ball_Arena SYSTEM PUBLIC "${raygui_SOURCE_DIR}/src" "${raygui_SOURCE_DIR}")
+
 if(MINGW) # makes mingw able to use the <print> header
     target_link_libraries(Ball_Arena PRIVATE stdc++exp)
 endif()

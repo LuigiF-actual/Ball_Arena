@@ -3,6 +3,8 @@
 #include <raylib.h>
 #include <raymath.h>
 
+#include "WorldConfig.hpp"
+
 class CameraHandler
 {
 public:
@@ -23,8 +25,8 @@ public:
         float wheel = GetMouseWheelMove();
 		if (wheel != 0)
 		{
-			float scale = 0.2f * wheel;
-			m_Cam.zoom = Clamp(expf(logf(m_Cam.zoom) + scale), 0.125f, 64.0f);
+			float scale = 0.4f * wheel;
+			m_Cam.zoom = Clamp(expf(logf(m_Cam.zoom) + scale), config::minCamZoom, config::maxCamZoom);
 		}
 	}
 

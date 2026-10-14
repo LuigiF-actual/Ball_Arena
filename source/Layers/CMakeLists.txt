@@ -3,12 +3,12 @@
 set(HEADER_FILES
 	"include/AppLayer.hpp"
 	"include/Layer.hpp"
-
+	"include/MenuLayer.hpp"
 )
 
 set(SOURCES_FILES
 	"AppLayer.cpp"
-
+	"MenuLayer.cpp"
 )
 
 
@@ -35,3 +35,5 @@ target_link_libraries(Layers
         Objects
         raylib
 )
+
+target_include_directories(Layers SYSTEM PUBLIC ${raygui_SOURCE_DIR}/src)

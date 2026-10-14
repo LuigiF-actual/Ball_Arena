@@ -10,6 +10,7 @@
 #include <raymath.h>
 
 #include "Layer.hpp"
+#include "MenuLayer.hpp"
 
 #include <CameraHandler.hpp>
 #include <KineticCircle.hpp>
@@ -41,6 +42,8 @@ private:
 	void updatePhysics();
 	void transferVelocity(KineticCircle& circle1, KineticCircle& circle2);
 
+	void checkForLayerSwitching();
+
 private:
 
 	bool m_IsDragging;
@@ -48,7 +51,7 @@ private:
 	DynamicQuadTreeContainer<KineticCircle>::iterator m_ActiveHandler;
 
 	Vector2 m_WorldMousePos{0.0f};
-	Vector2 m_RenderTexSize{ 1280.0f,720.0f };
+	Vector2 m_RenderTexSize{ config::initialResX, config::initialResY};
 
 	std::list < DynamicQuadTreeContainer<KineticCircle>::iterator > m_ActiveObjs;
 

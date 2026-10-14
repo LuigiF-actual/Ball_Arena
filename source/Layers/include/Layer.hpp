@@ -20,7 +20,14 @@ public:
 	{
 		QueueTransition(std::move(std::make_unique<T>(std::forward<Args>(args)...)));
 	}
+
+	bool IsActive() const { return m_Active; }
+	void SetActive(bool active) { m_Active = active; }
+
 private:
+
+	bool m_Active = true;
+
 	void QueueTransition(std::unique_ptr<Layer> layer);
 };
 

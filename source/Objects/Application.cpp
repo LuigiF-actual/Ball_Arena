@@ -1,3 +1,4 @@
+#include "Application.hpp"
 #include "include/Application.hpp"
 
 
@@ -78,28 +79,28 @@ Application& Application::Get()
 	return *s_Application;
 }
 
+void Application::setResolution(int width, int height)
+{
+
+	UnloadRenderTexture(m_RenderTarget);
+	m_RenderTarget = LoadRenderTexture(width, height);
+	RenderTextureResize event{ width,height };
+	RaiseEvent(event);
+	
+}
+
 void Application::UpdateDrawFrame()
 {
 	for (const std::unique_ptr<Layer>& layer : m_LayerStack)
 	{
-		layer->OnUpdate();
+		if (layer->IsActive())
+		{
+
+			layer->OnUpdate();
+
+		}
 	}
 
-
-	if (IsKeyPressed(KEY_U))
-	{
-
-		UnloadRenderTexture(m_RenderTarget);
-		m_RenderTarget = LoadRenderTexture(1920,1080);
-		RenderTextureResize event{ 1920,1080 };
-		RaiseEvent(event);
-
-	}
-
-	if (IsKeyPressed(KEY_P))
-	{
-		ToggleFullscreen();
-	}
 
 	BeginTextureMode(m_RenderTarget);
 
@@ -107,7 +108,13 @@ void Application::UpdateDrawFrame()
 
 	for (const std::unique_ptr<Layer>& layer : m_LayerStack)
 	{
-		layer->OnRender();
+		if (layer->IsActive())
+		{
+
+			layer->OnRender();
+
+		}
+
 	}
 
 	EndTextureMode();

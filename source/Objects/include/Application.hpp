@@ -8,6 +8,7 @@
 #include <functional>
 
 #include <raylib.h>
+#include <raymath.h>
 
 #include <Layer.hpp>
 
@@ -36,11 +37,9 @@ public:
 	void Stop();
 	
 
-	template<typename TLayer>
-	requires(std::is_base_of_v<Layer, TLayer>)
-	void PushLayer()
+	void PushLayer(std::unique_ptr<Layer> layer)
 	{
-		m_LayerStack.push_back(std::make_unique<TLayer>());
+		m_LayerStack.push_back(std::move(layer));
 	}
 
 	template<typename TLayer>
@@ -49,16 +48,60 @@ public:
 	{
 		for (const auto& layer : m_LayerStack)
 		{
-			if (auto casted = dynamic_cast<TLayer*>(layer.get()))
+			TLayer* casted = dynamic_cast<TLayer*>(layer.get());
+			if (casted != nullptr)
+			{
 				return casted;
+			}
 		}
 		return nullptr;
+	}
+
+
+	template<typename T>
+	void SwitchLayer()
+	{
+		T* targetLayer = GetLayer<T>();
+		if (targetLayer != nullptr)
+		{
+			for (std::unique_ptr<Layer>& layer : m_LayerStack)
+			{
+				layer->SetActive(false);
+			}
+			targetLayer->SetActive(true);
+		}
 	}
 
 	void RaiseEvent(Event& event);
 
 
 	static Application& Get();
+
+	Vector2 GetMouseInRenderTexture()
+	{
+		const float textureWidth = static_cast<float>(m_RenderTarget.texture.width);
+
+		const float textureHeight = static_cast<float>(m_RenderTarget.texture.height);
+
+		const float scaleX = GetScreenWidth() / textureWidth;
+		const float scaleY = GetScreenHeight() / textureHeight;
+		const float scale = std::min(scaleX, scaleY);
+
+		const float drawnWidth = textureWidth * scale;
+		const float drawnHeight = textureHeight * scale;
+
+		const Vector2 offset{(GetScreenWidth() - drawnWidth) / 2.0f,(GetScreenHeight() - drawnHeight) / 2.0f};
+
+		const Vector2 mouse = GetMousePosition();
+
+		return {
+			(mouse.x - offset.x) / scale,
+			(mouse.y - offset.y) / scale
+		};
+	}
+
+
+	void setResolution(int width, int height);
 
 private:
 

@@ -1,5 +1,6 @@
 #include "include/AppLayer.hpp"
 
+#include <Application.hpp>
 
 AppLayer::AppLayer()
 {
@@ -17,7 +18,7 @@ AppLayer::AppLayer()
 	for (size_t i = 0; i < config::circleAmmount; i++)
 	{
 		KineticCircle myCircle{ 
-			rand_float(10.0f,50.0f), 
+			rand_float(config::minCircleRadius,config::maxCircleRadius), 
 			{rand_float(0.0f,config::worldArea), rand_float(0.0f,config::worldArea)},
 			{(unsigned char)(rand() % 256),(unsigned char)(rand() % 256),(unsigned char)(rand() % 256), 255}
 		};
@@ -29,8 +30,6 @@ AppLayer::AppLayer()
 
 void AppLayer::OnEvent(Event& event)
 {
-	std::println("{}", event.ToString());
-
 	EventDispatcher dispatcher(event);
 
 	dispatcher.Dispatch<RenderTextureResize>(
@@ -45,6 +44,7 @@ void AppLayer::OnEvent(Event& event)
 
 void AppLayer::OnUpdate()
 {
+	checkForLayerSwitching();
 
 	m_Cam.dragAndZoom();
 
@@ -83,22 +83,20 @@ void AppLayer::OnRender()
 	EndMode2D();
 
 	DrawFPS(0,0);
-	DrawText(std::to_string(circlesDrawn).c_str(), 100, 0, 32, PURPLE);
-	DrawText(std::to_string(m_ActiveObjs.size()).c_str(), 200, 0, 32, PURPLE);
+	DrawText(("Objects in Screen:" + std::to_string(circlesDrawn)).c_str(), 100, 0, 32, PURPLE);
+	DrawText(( "Active Objs: " + std::to_string(m_ActiveObjs.size())).c_str(), 500, 0, 32, PURPLE);
 }
 
 
 
 bool AppLayer::OnWindowResize(RenderTextureResize& event)
 {
-	std::print("Here!");
 
 	m_RenderTexSize.x = event.GetWidth();
 	m_RenderTexSize.y = event.GetHeight();
 
-	event.Handled = true;
 
-	return true;
+	return false;
 }
 
 
@@ -219,6 +217,8 @@ void AppLayer::updatePhysics()
 			}
 
 
+
+
 			transferVelocity(circle->item, canditate->item);
 
 
@@ -263,8 +263,22 @@ void AppLayer::transferVelocity(KineticCircle& circle1, KineticCircle& circle2)
 	float dotProdNorm1 = Vector2DotProduct(bodyA.velocity, normal);
 	float dotProdNorm2 = Vector2DotProduct(bodyB.velocity, normal);
 
-	float m1 = (dotProdNorm1 * (bodyA.mass - bodyB.mass) + 2.0f * bodyB.mass * dotProdNorm2) / (bodyA.mass + bodyB.mass);
-	float m2 = (dotProdNorm2 * (bodyB.mass - bodyA.mass) + 2.0f * bodyA.mass * dotProdNorm1) / (bodyA.mass + bodyB.mass);
+	float m1 = 0.5f * (dotProdNorm1 * (bodyA.mass - bodyB.mass) + 2.0f * bodyB.mass * dotProdNorm2) / (bodyA.mass + bodyB.mass);
+	float m2 =        (dotProdNorm2 * (bodyB.mass - bodyA.mass) + 2.0f * bodyA.mass * dotProdNorm1) / (bodyA.mass + bodyB.mass);
+
+	float overlap = circle1.getRadius() + circle2.getRadius() - distance;
+
+	if (overlap > 0.0f)
+	{
+		float inverseMassA = 1.0f / bodyA.mass;
+		float inverseMassB = 1.0f / bodyB.mass;
+
+		Vector2 correction = Vector2Scale(normal,overlap / (inverseMassA + inverseMassB));
+
+		circle1.getPosition() = Vector2Subtract(circle1.getPosition(),Vector2Scale(correction, inverseMassA));
+
+		circle2.getPosition() = Vector2Add(circle2.getPosition(),Vector2Scale(correction, inverseMassB));
+	}
 
 	bodyA.velocity = Vector2Add(Vector2Scale(tangent, dotProdTan1), Vector2Scale(normal, m1));
 	bodyB.velocity = Vector2Add(Vector2Scale(tangent, dotProdTan2), Vector2Scale(normal, m2));
@@ -272,5 +286,15 @@ void AppLayer::transferVelocity(KineticCircle& circle1, KineticCircle& circle2)
 
 	std::println("BodyA -> {} : {}", bodyA.velocity.x, bodyA.velocity.y);
 	std::println("BodyB -> {} : {}", bodyB.velocity.x, bodyB.velocity.y);
+
+}
+
+void AppLayer::checkForLayerSwitching()
+{
+	
+	if (IsKeyPressed(KEY_ESCAPE))
+	{
+		Application::Get().SwitchLayer<MenuLayer>();
+	}
 
 }
