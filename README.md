@@ -12,9 +12,15 @@
 ### how to compile and run
 #### CMake 3.30.0+ is required
 ```
+
+git clone https://github.com/LuigiF-actual/Ball_Arena.git
+
+cd Ball_Arena
+
 cmake -B build -G Ninja
 cmake --build build
 cd build\source\Ball_Arena.exe
+
 ```
 
 
