@@ -1,10 +1,16 @@
 # Ball Arena
 
-## 2D circle physics showcase
-### tested and compiled on windows 11 with MSVC 19 and GNU 15.2.0
-### CMake 3.30.0+ is used for the build system
-### how to compile and run
+### 2D circle physics showcase
 
+
+### tested and compiled on:
+- Windows 11 with MSVC 19 and GNU 15.2.0
+- Linux Mint with GNU 15.2.0
+
+---
+
+### how to compile and run
+#### CMake 3.30.0+ is required
 ```
 cmake -B build -G Ninja
 cmake --build build
