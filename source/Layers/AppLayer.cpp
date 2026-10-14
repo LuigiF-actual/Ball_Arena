@@ -69,7 +69,7 @@ void AppLayer::OnRender()
 	for (auto& circle : m_QuadTree.search(m_CameraArea))
 	{
 		//DrawCircleV(circle->item.getPos(), circle->item.getRadius(), RED);
-		DrawCircleSector(circle->item.getPos(), circle->item.getRadius(), 0.0f, 360.0f, 10, circle->item.getColor()); // way more perfomant
+		DrawCircleSector(circle->item.getPos(), circle->item.getRadius(), 0.0f, 360.0f, config::circleResolution, circle->item.getColor()); // way more perfomant
 		circlesDrawn += 1;
 	}
 
@@ -282,10 +282,6 @@ void AppLayer::transferVelocity(KineticCircle& circle1, KineticCircle& circle2)
 
 	bodyA.velocity = Vector2Add(Vector2Scale(tangent, dotProdTan1), Vector2Scale(normal, m1));
 	bodyB.velocity = Vector2Add(Vector2Scale(tangent, dotProdTan2), Vector2Scale(normal, m2));
-
-
-	std::println("BodyA -> {} : {}", bodyA.velocity.x, bodyA.velocity.y);
-	std::println("BodyB -> {} : {}", bodyB.velocity.x, bodyB.velocity.y);
 
 }
 
