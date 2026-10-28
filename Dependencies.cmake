@@ -24,3 +24,22 @@ FetchContent_Declare(
     
 FetchContent_MakeAvailable(raygui)
 
+FetchContent_Declare(
+    freetype
+    GIT_REPOSITORY https://github.com/freetype/freetype.git
+    GIT_TAG VER-2-14-1
+    GIT_SHALLOW TRUE
+)
+FetchContent_MakeAvailable(freetype)
+
+if(NOT TARGET Freetype::Freetype)
+    add_library(Freetype::Freetype ALIAS freetype)  
+endif()
+
+FetchContent_Declare(
+    rmlui
+    GIT_REPOSITORY https://github.com/mikke89/RmlUi.git
+    GIT_SHALLOW TRUE 
+)
+
+FetchContent_MakeAvailable(rmlui)

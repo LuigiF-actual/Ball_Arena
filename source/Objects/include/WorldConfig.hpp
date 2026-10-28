@@ -5,7 +5,7 @@ namespace config
 {
 	constexpr float worldArea = 50'000.0f;
 	constexpr size_t circleAmmount = 10'000;
-	constexpr size_t circleResolution = 8;
+	constexpr size_t circleResolution = 32;
 
 	constexpr float initialResX = 1280;
 	constexpr float initialResY = 720;
