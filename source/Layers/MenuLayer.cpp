@@ -23,6 +23,8 @@ MenuLayer::MenuLayer()
 		TraceLog(LOG_ERROR, "FONT NOT LOADED!");
 	}
 
+	SetupDataBinding();
+
 	m_MainMenuDoc = m_Context->LoadDocument("Assets/ui/main.rml");
 	m_SettingsDoc = m_Context->LoadDocument("Assets/ui/settings.rml");
 
@@ -36,7 +38,7 @@ MenuLayer::MenuLayer()
 	}
 
 	m_SwitchDoc = std::make_unique<SwitchDoc>(m_MainMenuDoc, m_SettingsDoc);
-
+	m_ScreenResBtn = std::make_unique<ScreenResolutionBtn>(m_SettingsDoc, m_PendingSettings.resolution, m_PendingSettings.width, m_PendingSettings.height);
 }
 
 MenuLayer::~MenuLayer()

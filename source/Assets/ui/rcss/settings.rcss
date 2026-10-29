@@ -126,8 +126,8 @@ select {
 
 }
 
-#resolution-back,
-#resolution-front {
+.arrow_btn
+{
     width: 72px;
     height: 72px;
     box-sizing: border-box;
@@ -136,27 +136,17 @@ select {
 }
 
 #resolution-back {
-    decorator: image("arrow.tga" flip-horizontal contain center center);
+    decorator: image("../../imgs/arrow.tga" flip-horizontal contain center center);
 }
 
 #resolution-front {
-    decorator: image("arrow.tga" contain center center);
+    decorator: image("../../imgs/arrow.tga" contain center center);
 }
-
-#circle-back,
-#circle-front {
-    width: 72px;
-    height: 72px;
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0 10px;
-}
-
 
 #circle-back {
-    decorator: image("arrow.tga" flip-horizontal contain center center);
+    decorator: image("../../imgs/arrow.tga" flip-horizontal contain center center);
 }
 
 #circle-front {
-    decorator: image("arrow.tga" contain center center);
+    decorator: image("../../imgs/arrow.tga" contain center center);
 }

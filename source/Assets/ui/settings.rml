@@ -1,7 +1,6 @@
 <rml>
 <head>
     <link type="text/rcss" href="rcss/settings.rcss" />
-    <script src="test.lua"></script>
 </head>
 
 <body>
@@ -13,22 +12,22 @@
         <div class="settingOption">
             <h5>resolution</h5>
             <div class="spinnerBtn">
-                <button id="resolution-back" class="button button1" onclick=""></button>
+                <button id="resolution_back" class="button button1 arrow_btn" onclick=""></button>
                 <div>
-                    <p><span id="resolution-text">{{resolution}}</span></p>
+                    <p><span id="resolution_text">{{screenResolution}}</span></p>
                 </div>
-                <button id="resolution-front" class="button button1" onclick=""></button>
+                <button id="resolution_front" class="button button1 arrow_btn" onclick=""></button>
             </div>
         </div>
 
         <div class="settingOption">
             <h5>Circle Polygons</h5>
             <div class="spinnerBtn">
-                <button id="circle-back" class="button button1" onclick=""></button>
+                <button id="circle_back" class="button button1 arrow_btn" onclick=""></button>
                 <div>
-                    <p><span id="circle-resolution-text">{{circleSides}}</span></p>
+                    <p><span id="circle_resolution_text">{{circleResolution}}</span></p>
                 </div>
-                <button id="circle-front" class="button button1" onclick=""></button>
+                <button id="circle_front" class="button button1 arrow_btn" onclick=""></button>
             </div>
         </div>
 
