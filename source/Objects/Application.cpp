@@ -35,6 +35,7 @@ Application::Application(const ApplicationSpecification& specification)
 	SetTextureFilter(m_RenderTarget.texture, TEXTURE_FILTER_POINT);
 
 
+
 }
 
 Application::~Application()
@@ -108,7 +109,7 @@ void Application::UpdateDrawFrame()
 
 	for (const std::unique_ptr<Layer>& layer : m_LayerStack)
 	{
-		if (layer->IsActive())
+		if (layer->IsActive() && !layer->IsUi())
 		{
 
 			layer->OnRender();
@@ -143,6 +144,16 @@ void Application::UpdateDrawFrame()
 		Vector2{ 0, 0 }, 0.0f, WHITE
 	);
 
+	for (const std::unique_ptr<Layer>& layer : m_LayerStack)
+	{
+		if (layer->IsActive() && layer->IsUi())
+		{
+
+			layer->OnRender();
+
+		}
+
+	}
 
 	EndDrawing();
 }

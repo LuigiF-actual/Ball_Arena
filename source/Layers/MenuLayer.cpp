@@ -1,9 +1,48 @@
 #include "include/MenuLayer.hpp"
 
 #include <Application.hpp>
+#include <rlgl.h>
 
 MenuLayer::MenuLayer()
 {
+
+	RmlGL3::Initialize();
+
+	m_Renderer = std::make_unique<RenderInterface_GL3>();
+	Rml::SetRenderInterface(m_Renderer.get());
+
+	Rml::Initialise();
+
+	m_Context = Rml::CreateContext(
+		"main",
+		Rml::Vector2i{ GetScreenWidth(), GetScreenHeight() }
+	);
+
+	if (!Rml::LoadFontFace("Assets/fonts/Acme 9 Regular.ttf"))
+	{
+		TraceLog(LOG_ERROR, "FONT NOT LOADED!");
+	}
+
+	m_MainMenuDoc = m_Context->LoadDocument("Assets/ui/main.rml");
+	m_SettingsDoc = m_Context->LoadDocument("Assets/ui/settings.rml");
+
+	if (m_MainMenuDoc)
+	{
+		m_MainMenuDoc->Show();
+	}
+	else
+	{
+		TraceLog(LOG_ERROR, "Main menu not available");
+	}
+
+	m_SwitchDoc = std::make_unique<SwitchDoc>(m_MainMenuDoc, m_SettingsDoc);
+
+}
+
+MenuLayer::~MenuLayer()
+{
+	Rml::Shutdown();
+	RmlGL3::Shutdown();
 }
 
 
@@ -24,37 +63,24 @@ void MenuLayer::OnEvent(Event& event)
 
 void MenuLayer::OnUpdate()
 {
+
+	m_Context->SetDimensions(Rml::Vector2i{ static_cast<int>(m_RenderTexSize.x),static_cast<int>(m_RenderTexSize.y) });
+
+	QueryUserInputs();
+
+	m_Context->Update();
+
 }
 
 void MenuLayer::OnRender()
 {
-	
-	GuiLabel({ (m_RenderTexSize.x - 400.0f ) / 2.0f,m_RenderTexSize.y*0.1f,400.0f,200.0f }, "Ball_Arena");
+	m_Renderer->SetViewport(static_cast<int>(m_RenderTexSize.x), static_cast<int>(m_RenderTexSize.y));
+	rlDrawRenderBatchActive();
+	m_Renderer->BeginFrame();
 
-	if (GuiButton({ (m_RenderTexSize.x - 400.0f ) / 2.0f, m_RenderTexSize.y * 0.3f,400.0f,100 }, "Play!"))
-	{
-		
-		Application::Get().SwitchLayer<AppLayer>();
-		m_ChangeRes = false;
-		
-	}
+	m_Context->Render();
 
-	if (GuiButton({ (m_RenderTexSize.x - 400.0f) / 2.0f, m_RenderTexSize.y * 0.5f,400.0f,100.0f }, "Resolution"))
-	{
-		m_ChangeRes = !m_ChangeRes;
-	}
-
-
-	if (GuiButton({ (m_RenderTexSize.x - 400.0f) / 2.0f, m_RenderTexSize.y * 0.7f,400.0f,100.0f }, "Fullscreen"))
-	{
-		ToggleFullscreen();
-	}
-
-	if (m_ChangeRes)
-	{
-		changeResolution();
-	}
-
+	m_Renderer->EndFrame();
 }
 
 bool MenuLayer::OnWindowResize(RenderTextureResize& event)
@@ -66,4 +92,43 @@ bool MenuLayer::OnWindowResize(RenderTextureResize& event)
 	std::println("{} : {}", m_RenderTexSize.x, m_RenderTexSize.y);
 
 	return false;
+}
+
+void MenuLayer::QueryUserInputs()
+{
+	
+	const Vector2 mouse = GetMousePosition();
+
+	m_Context->ProcessMouseMove(
+		static_cast<int>(mouse.x),
+		static_cast<int>(mouse.y),
+		0
+	);
+
+	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+	{
+		m_Context->ProcessMouseButtonDown(0, 0);
+	}
+
+	if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+	{
+		m_Context->ProcessMouseButtonUp(0, 0);
+	}
+
+	if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
+	{
+		m_Context->ProcessMouseButtonDown(1, 0);
+	}
+
+	if (IsMouseButtonReleased(MOUSE_BUTTON_RIGHT))
+	{
+		m_Context->ProcessMouseButtonUp(1, 0);
+	}
+
+	const float wheel = GetMouseWheelMove();
+	if (wheel != 0.0f)
+	{
+		m_Context->ProcessMouseWheel(-wheel, 0);
+	}
+
 }

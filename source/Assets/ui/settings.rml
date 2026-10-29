@@ -1,0 +1,42 @@
+<rml>
+<head>
+    <link type="text/rcss" href="rcss/settings.rcss" />
+    <script src="test.lua"></script>
+</head>
+
+<body>
+    <div id="settingsHeader" >
+        <h1>Settings</h1>
+    </div>
+    <div data-model="settings_model" id="settingsMenu">
+
+        <div class="settingOption">
+            <h5>resolution</h5>
+            <div class="spinnerBtn">
+                <button id="resolution-back" class="button button1" onclick=""></button>
+                <div>
+                    <p><span id="resolution-text">{{resolution}}</span></p>
+                </div>
+                <button id="resolution-front" class="button button1" onclick=""></button>
+            </div>
+        </div>
+
+        <div class="settingOption">
+            <h5>Circle Polygons</h5>
+            <div class="spinnerBtn">
+                <button id="circle-back" class="button button1" onclick=""></button>
+                <div>
+                    <p><span id="circle-resolution-text">{{circleSides}}</span></p>
+                </div>
+                <button id="circle-front" class="button button1" onclick=""></button>
+            </div>
+        </div>
+
+
+        <button  id="windowMode" class="button button1" onclick="">fullscreen</button>
+
+        <button id="Apply_btn" class="button button1">Apply</button>
+        <button id="back_btn" class="button button1">Back</button>
+    </div>
+</body>
+</rml>

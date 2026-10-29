@@ -1,0 +1,54 @@
+body {
+    font-family: "Grixel Acme 9 Regular";
+    background: white;
+    color: blue;
+    font-size: 42dp;
+    width: 100%;
+    height: 100%;
+}
+
+#menu {
+    margin: auto;
+    top: 100px;
+    color: blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#menu h1{
+    color: green;
+}
+
+
+.button {
+    background-color: hsl(194, 100%, 20%);
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.5em;
+    margin: 6px 2px;
+    transition: background-color color 0.2s linear-out;
+    width: 40%;
+}
+
+.button1 {
+    border: 2px hsl(189, 75%, 52%);
+    color: hsl(189, 75%, 52%);
+}
+
+.button1:hover {
+    background-color: orange;
+    color: white;
+}
+
+.divider {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2em;
+    width: 75%;
+    height: 4px;
+    background-color: hsl(189, 75%, 52%);
+}

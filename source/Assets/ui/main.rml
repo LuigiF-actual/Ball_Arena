@@ -1,0 +1,20 @@
+<rml>
+    <head>
+        <link type="text/rcss" href="rcss/main.rcss" />
+        <link type="text/rcss" href="rcss/header.rcss" />
+    </head>
+    <body>
+
+        <div id="header">
+            <h1>Ball Arena</h1>
+        </div>
+        <div class="divider"></div>
+        <div id="menu">
+
+            <button id="testBtn" class="button button1">Play!</button>
+            <button id="settings_btn" class="button button1">settings</button>
+
+        </div>
+
+    </body>
+</rml>

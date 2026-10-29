@@ -10,6 +10,7 @@ set(HEADER_FILES
 	"include/KineticCircle.hpp"
 	"include/Event.hpp"
 	"include/WindowEvents.hpp"
+	"include/MenuButtonInteractions.hpp"
 )
 
 set(SOURCES_FILES
@@ -39,4 +40,6 @@ target_link_libraries(Objects
     PUBLIC
 		Layers
         raylib
+		RmlUi::RmlUi
 )
+

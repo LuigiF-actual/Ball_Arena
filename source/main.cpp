@@ -20,13 +20,16 @@ int main()
     appSpec.Width = 1280;
     appSpec.Height = 720;
     appSpec.VSync = false;
+    appSpec.IsResizeable = false;
 
-    auto menuLayer = std::make_unique<MenuLayer>();
-    auto appLayer = std::make_unique<AppLayer>();
-    appLayer->SetActive(false);
 
     Application app(appSpec);
        
+    auto menuLayer = std::make_unique<MenuLayer>();
+    menuLayer->SetUi(true);
+    auto appLayer = std::make_unique<AppLayer>();
+    appLayer->SetActive(false);
+
     SetExitKey(NULL);
 
     GuiSetStyle(LABEL, TEXT_ALIGNMENT, TEXT_ALIGN_CENTER);

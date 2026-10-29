@@ -1,0 +1,23 @@
+#header {
+    width: 100%;
+    height: 25%;
+    color: blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2em;
+    decorator: image("../../imgs/gameIcon.tga" scale-down center 15px);
+}
+
+#header h1 {
+
+    width: 100%;
+    margin-bottom: 1em;
+    text-align: center;
+    color: hsl(189, 75%, 52%);
+}
+
+#header-image {
+    width: 100%;
+    height: 180px;
+}
