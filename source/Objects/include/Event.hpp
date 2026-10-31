@@ -9,6 +9,7 @@ enum class EventType
 	WindowClose, WindowResize,
 	KeyPressed, KeyReleased,
 	MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled,
+	CircleSegmentsChange
 };
 
 

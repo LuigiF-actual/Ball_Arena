@@ -3,6 +3,7 @@
 #include "Event.hpp"
 
 #include <format>
+#include <functional>
 
 class WindowClosedEvent : public Event
 {
@@ -47,6 +48,24 @@ public:
 	}
 
 	EVENT_CLASS_TYPE(WindowResize)
+
 private:
 	int m_Width, m_Height;
+};
+
+
+class CircleSegments : public Event
+{
+public:
+	CircleSegments(int segments_)
+		:
+		m_Segments(segments_)
+	{}
+
+	int GetSegments() const { return m_Segments; }
+	
+	EVENT_CLASS_TYPE(CircleSegmentsChange)
+
+private:
+	int m_Segments;
 };

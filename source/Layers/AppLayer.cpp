@@ -40,6 +40,14 @@ void AppLayer::OnEvent(Event& event)
 		}
 	);
 
+	dispatcher.Dispatch<CircleSegments>(
+		[this]
+		(CircleSegments& e)
+		{
+			return OnCircleSegmentsChange(e);
+		}
+	);
+
 }
 
 void AppLayer::OnUpdate()
@@ -68,8 +76,7 @@ void AppLayer::OnRender()
 
 	for (auto& circle : m_QuadTree.search(m_CameraArea))
 	{
-		//DrawCircleV(circle->item.getPos(), circle->item.getRadius(), RED);
-		DrawCircleSector(circle->item.getPos(), circle->item.getRadius(), 0.0f, 360.0f, config::circleResolution, circle->item.getColor()); // way more perfomant
+		DrawCircleSector(circle->item.getPos(), circle->item.getRadius(), 0.0f, 360.0f, m_CircleSegments, circle->item.getColor()); // way more perfomant
 		circlesDrawn += 1;
 	}
 
@@ -97,6 +104,12 @@ bool AppLayer::OnWindowResize(RenderTextureResize& event)
 
 
 	return false;
+}
+
+bool AppLayer::OnCircleSegmentsChange(CircleSegments& event)
+{
+	m_CircleSegments = event.GetSegments();
+	return true;
 }
 
 

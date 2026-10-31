@@ -9,8 +9,9 @@ set(HEADER_FILES
 	"include/CameraHandler.hpp"
 	"include/KineticCircle.hpp"
 	"include/Event.hpp"
-	"include/WindowEvents.hpp"
+	"include/GameEvents.hpp"
 	"include/MenuButtonInteractions.hpp"
+	"include/PendingSettings.hpp"
 )
 
 set(SOURCES_FILES

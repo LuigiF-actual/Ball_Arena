@@ -11,8 +11,9 @@
         <div class="divider"></div>
         <div id="menu">
 
-            <button id="testBtn" class="button button1">Play!</button>
-            <button id="settings_btn" class="button button1">settings</button>
+            <button id="play_btn" class="button button1">Play!</button>
+			<button id="settings_btn" class="button button1">settings</button>
+			<button id="exit_btn" class="button button1">exit</button>
 
         </div>
 

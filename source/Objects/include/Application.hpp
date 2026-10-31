@@ -102,6 +102,15 @@ public:
 
 
 	void setResolution(int width, int height);
+	
+	void setWindowMode(bool isFullScreen)
+	{
+
+		if (isFullScreen != IsWindowFullscreen())
+		{
+			ToggleFullscreen();
+		}
+	}
 
 private:
 
@@ -112,7 +121,7 @@ private:
 
 	ApplicationSpecification m_Specification;
 
-	bool m_Running = false;
+	bool m_Running = true;
 
 	std::vector<std::unique_ptr<Layer>> m_LayerStack;
 

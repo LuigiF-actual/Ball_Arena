@@ -38,7 +38,15 @@ MenuLayer::MenuLayer()
 	}
 
 	m_SwitchDoc = std::make_unique<SwitchDoc>(m_MainMenuDoc, m_SettingsDoc);
-	m_ScreenResBtn = std::make_unique<ScreenResolutionBtn>(m_SettingsDoc, m_PendingSettings.resolution, m_PendingSettings.width, m_PendingSettings.height);
+	m_ScreenResBtn = std::make_unique<ScreenResolutionBtn>(m_SettingsDoc, m_PendingSettings);
+	m_CircleResBtn = std::make_unique<CircleSegmentsBtn>(m_SettingsDoc,m_PendingSettings);
+	m_FullScreenBtn = std::make_unique<FullScreenBtn>(m_SettingsDoc, m_PendingSettings);
+	m_ApplyBtn = std::make_unique<ApplyBtn>(m_SettingsDoc, [this] { ApplyPendingSettings(); });
+	m_PlayGameBtn = std::make_unique<PlayGameBtn>(m_MainMenuDoc, [this] { SwitchToGame(); });
+	m_ExitGameBtn = std::make_unique<ExitGameBtn>(m_MainMenuDoc, [this] { ExitGame(); });
+
+
+	m_Context->SetDensityIndependentPixelRatio(std::min(GetScreenWidth() / 1600.0f, GetScreenHeight() / 1000.0f));
 }
 
 MenuLayer::~MenuLayer()
@@ -66,7 +74,7 @@ void MenuLayer::OnEvent(Event& event)
 void MenuLayer::OnUpdate()
 {
 
-	m_Context->SetDimensions(Rml::Vector2i{ static_cast<int>(m_RenderTexSize.x),static_cast<int>(m_RenderTexSize.y) });
+	m_Context->SetDimensions(Rml::Vector2i{ GetScreenWidth(), GetScreenHeight() });
 
 	QueryUserInputs();
 
@@ -76,7 +84,7 @@ void MenuLayer::OnUpdate()
 
 void MenuLayer::OnRender()
 {
-	m_Renderer->SetViewport(static_cast<int>(m_RenderTexSize.x), static_cast<int>(m_RenderTexSize.y));
+	m_Renderer->SetViewport(GetScreenWidth(), GetScreenHeight());
 	rlDrawRenderBatchActive();
 	m_Renderer->BeginFrame();
 
@@ -133,4 +141,9 @@ void MenuLayer::QueryUserInputs()
 		m_Context->ProcessMouseWheel(-wheel, 0);
 	}
 
+}
+
+void MenuLayer::SwitchToGame()
+{
+	Application::Get().SwitchLayer<AppLayer>();
 }

@@ -32,9 +32,9 @@
         </div>
 
 
-        <button  id="windowMode" class="button button1" onclick="">fullscreen</button>
+        <button  id="window_mode" class="button button1" onclick="">{{windowMode}}</button>
 
-        <button id="Apply_btn" class="button button1">Apply</button>
+        <button id="apply_btn" class="button button1">Apply</button>
         <button id="back_btn" class="button button1">Back</button>
     </div>
 </body>

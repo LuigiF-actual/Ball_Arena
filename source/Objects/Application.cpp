@@ -7,7 +7,7 @@
 #include <ranges>
 #include <print>
 
-#include "include/WindowEvents.hpp"
+#include "include/GameEvents.hpp"
 
 static Application* s_Application = nullptr;
 
@@ -48,9 +48,9 @@ Application::~Application()
 
 void Application::Run()
 {
-
+	
 	// Main Application loop
-	while (!WindowShouldClose())
+	while (!WindowShouldClose() && m_Running)
 	{
 		UpdateDrawFrame();
 	}
@@ -82,7 +82,7 @@ Application& Application::Get()
 
 void Application::setResolution(int width, int height)
 {
-
+	SetWindowSize(width, height);
 	UnloadRenderTexture(m_RenderTarget);
 	m_RenderTarget = LoadRenderTexture(width, height);
 	RenderTextureResize event{ width,height };

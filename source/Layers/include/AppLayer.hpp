@@ -16,7 +16,7 @@
 #include <KineticCircle.hpp>
 #include <QuadTree.hpp>
 #include <Box.hpp>
-#include <WindowEvents.hpp>
+#include <GameEvents.hpp>
 #include <WorldConfig.hpp>
 
 class AppLayer : public Layer
@@ -34,6 +34,7 @@ public:
 private:
 
 	bool OnWindowResize(RenderTextureResize& event);
+	bool OnCircleSegmentsChange(CircleSegments& event);
 
 	void updateMousePos();
 	void checkForClicks();
@@ -47,6 +48,7 @@ private:
 private:
 
 	bool m_IsDragging;
+	int m_CircleSegments = 8;
 
 	DynamicQuadTreeContainer<KineticCircle>::iterator m_ActiveHandler;
 

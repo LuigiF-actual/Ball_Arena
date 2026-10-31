@@ -20,7 +20,7 @@ body {
     background-color: hsla(0, 1%, 51%, 0.1);
     margin-bottom: 1em;
     border-radius: 3em;
-    border: 2px hsl(189, 75%, 52%);
+    border: 2dp hsl(189, 75%, 52%);
 }
 
 #settingsMenu h1{
@@ -29,18 +29,18 @@ body {
 
 .button {
     background-color: hsl(194, 100%, 20%);
-    padding: 16px 32px;
+    padding: 16dp 32dp;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 0.5em;
-    margin: 6px 2px;
+    margin: 6dp 2dp;
     transition: background-color color 0.2s linear-out;
     width: 40%;
 }
 
 .button1 {
-    border: 2px hsl(189, 75%, 52%);
+    border: 2dp hsl(189, 75%, 52%);
     color: hsl(189, 75%, 52%);
 }
 
@@ -55,18 +55,18 @@ body {
     margin-right: auto;
     margin-bottom: 2em;
     width: 75%;
-    height: 4px;
+    height: 4dp;
     background-color: hsl(189, 75%, 52%);
 }
 
 label {
   font-size: 1rem;
-  padding-right: 10px;
+  padding-right: 10dp;
 }
 
 select {
   font-size: 0.9rem;
-  padding: 2px 5px;
+  padding: 2dp 5dp;
 }
 
 #settingsHeader {
@@ -84,7 +84,7 @@ select {
     width: 100%;
     margin-top: 1em;
     margin-bottom: 1em;
-    font-size: 66px;
+    font-size: 66dp;
     text-align: center;
     color: hsl(189, 75%, 52%);
 
@@ -98,7 +98,7 @@ select {
 }
 
 .settingOption h5{
-    font-size: 40px;
+    font-size: 40dp;
     color: black;
     margin-bottom: 0.5em;
 }
@@ -115,38 +115,38 @@ select {
     align-items: center;
     justify-content: center;
 
-    height: 72px;
+    height: 72dp;
     width: 10em;
     margin: 0;
 
     color: black;
     background-color: hsl(189, 75%, 52%);
-    border: 2px aqua;
-    font-size: 30px;
+    border: 2dp aqua;
+    font-size: 30dp;
 
 }
 
 .arrow_btn
 {
-    width: 72px;
-    height: 72px;
+    width: 72dp;
+    height: 72dp;
     box-sizing: border-box;
     padding: 0;
-    margin: 0 10px;
+    margin: 0 10dp;
 }
 
-#resolution-back {
+#resolution_back {
     decorator: image("../../imgs/arrow.tga" flip-horizontal contain center center);
 }
 
-#resolution-front {
+#resolution_front {
     decorator: image("../../imgs/arrow.tga" contain center center);
 }
 
-#circle-back {
+#circle_back {
     decorator: image("../../imgs/arrow.tga" flip-horizontal contain center center);
 }
 
-#circle-front {
+#circle_front {
     decorator: image("../../imgs/arrow.tga" contain center center);
 }

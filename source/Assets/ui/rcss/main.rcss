@@ -9,7 +9,7 @@ body {
 
 #menu {
     margin: auto;
-    top: 100px;
+    top: 100dp;
     color: blue;
     display: flex;
     flex-direction: column;
@@ -23,18 +23,18 @@ body {
 
 .button {
     background-color: hsl(194, 100%, 20%);
-    padding: 16px 32px;
+    padding: 16dp 32dp;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 0.5em;
-    margin: 6px 2px;
+    margin: 6dp 2dp;
     transition: background-color color 0.2s linear-out;
     width: 40%;
 }
 
 .button1 {
-    border: 2px hsl(189, 75%, 52%);
+    border: 2dp hsl(189, 75%, 52%);
     color: hsl(189, 75%, 52%);
 }
 
@@ -49,6 +49,6 @@ body {
     margin-right: auto;
     margin-bottom: 2em;
     width: 75%;
-    height: 4px;
+    height: 4dp;
     background-color: hsl(189, 75%, 52%);
 }
